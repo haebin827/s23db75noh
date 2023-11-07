@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+
+  .container-fluid
+  .row
+    -
+      let results = [
+        { year: 2020, location: 'City A', candidate: 'Candidate A' },
+        { year: 2021, location: 'City B', candidate: 'Candidate B' },
+        { year: 2022, location: 'City C', candidate: 'Candidate C' }
+      ]
+    each result, index in results
+      .col-sm-2(onclick=`buy(${index})`)
+        h3 Year: #{result.year}
+        p Location: #{result.location}
+        p Candidate: #{result.candidate}
+
+  script.
+    function buy(index) {
+      alert(`You purchased item ${index}.`);
+    }
