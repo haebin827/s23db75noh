@@ -4,12 +4,42 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+
+require('dotenv').config();
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString);
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var electionsRouter = require('./routes/elections');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
+var Election = require("./models/election");
 
+// We can seed the collection if needed on server start
+async function recreateDB(){
+// Delete everything
+await Costume.deleteMany();
+let instance1 = new
+Costume({costume_type:"ghost", size:'large',
+cost:15.4});
+instance1.save().then(doc=>{
+console.log("First object saved")}
+).catch(err=>{
+
+console.error(err)
+});
+}
+let reseed = true;
+if (reseed) {recreateDB();}
 var app = express();
 
 // view engine setup
