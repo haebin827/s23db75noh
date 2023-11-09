@@ -30,4 +30,34 @@ exports.election_list = async function(req, res) {
     res.status(500);
     res.send(`{"error": ${err}}`);
     }
+};
+
+// VIEWS
+// Handle a show all view
+exports.election_view_all_Page = async function(req, res) {
+    try{
+    theElections = await Election.find();
+    res.render('elections', { title: 'Election Search Results', results: theElections});
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
     };
+
+// Handle Costume create on POST.
+exports.election_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new Election();
+    document.election_type = req.body.election_type;
+    document.cost = req.body.cost;
+    document.size = req.body.size;
+    try{
+    let result = await document.save();
+    res.send(result);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+};

@@ -1,9 +1,7 @@
 var express = require('express');
+const election_controllers= require('../controllers/election');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('elections', { title: 'Search Results - Elections' });
-});
-
+/* GET elections */
+router.get('/', election_controllers.election_view_all_Page );
 module.exports = router;
