@@ -19,3 +19,15 @@ res.send('NOT IMPLEMENTED: Election delete DELETE ' + req.params.id);
 exports.election_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: Election update PUT' + req.params.id);
 };
+
+// List of all Costumes
+exports.election_list = async function(req, res) {
+    try{
+    theElections = await Election.find();
+    res.send(theElections);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
