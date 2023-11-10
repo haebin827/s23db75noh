@@ -23,8 +23,8 @@ res.send('NOT IMPLEMENTED: Election update PUT' + req.params.id);
 // List of all Elections
 exports.election_list = async function(req, res) {
     try{
-    theElections = await Election.find();
-    res.send(theElections);
+    Election = await Election.find();
+    res.send(Election);
     }
     catch(err){
     res.status(500);
@@ -36,22 +36,22 @@ exports.election_list = async function(req, res) {
 // Handle a show all view
 exports.election_view_all_Page = async function(req, res) {
     try{
-    theElections = await Election.find();
-    res.render('elections', { title: 'Election Search Results', results: theElections});
+        Election = await Election.find();
+        res.render('Election', { title: 'Election Search Results', results: Election});
     }
     catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
-    };
+};
 
-// Handle Costume create on POST.
+// Handle Election create on POST.
 exports.election_create_post = async function(req, res) {
     console.log(req.body)
     let document = new Election();
-    document.election_type = req.body.election_type;
-    document.cost = req.body.cost;
-    document.size = req.body.size;
+    document.year = req.body.year;
+    document.location = req.body.location;
+    document.candidate = req.body.candidate;
     try{
     let result = await document.save();
     res.send(result);
@@ -60,4 +60,48 @@ exports.election_create_post = async function(req, res) {
     res.status(500);
     res.send(`{"error": ${err}}`);
     }
+};
+
+// for a specific Election.
+exports.election_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await Election.findById(req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+};
+
+// Handle election delete form on DELETE.
+exports.election_delete = async function (req, res) {
+    console.log("delete " + req.params.id);
+    try {
+      result = await Election.findByIdAndDelete(req.params.id);
+      console.log("Removed " + result);
+      res.send(result);
+    } catch (err) {
+      res.status(500);
+      res.send(`{"error": Error deleting ${err}}`);
+    }
+  };
+
+// Handle election update form on PUT.
+exports.election_update_put = async function (req, res) {
+  console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`);
+  try {
+    let toUpdate = await Election.findById(req.params.id);
+    // Do updates of properties
+    if (req.body.year) toUpdate.year = req.body.year;
+    if (req.body.location) toUpdate.location = req.body.location;
+    if (req.body.candidate) toUpdate.candidate = req.body.candidate;
+    let result = await toUpdate.save();
+    console.log("Sucess " + result);
+    res.send(result);
+  } catch (err) {
+    res.status(500);
+    res.send(`{"error": ${err}: Update for id ${req.params.id} failed`);
+  }
 };
