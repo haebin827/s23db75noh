@@ -28,6 +28,10 @@ exports.election_view_one_Page = function(req, res) {
 exports.election_update_Page = function(req, res) {
   res.send('NOT IMPLEMENTED: Election update Page' + req.params.id);
 };
+// Add
+exports.election_delete_Page = function(req, res) {
+  res.send('NOT IMPLEMENTED: Election update Page' + req.params.id);
+};
 
 // List of all Elections
 exports.election_list = async function(req, res) {
@@ -156,3 +160,17 @@ exports.election_update_Page = async function(req, res) {
   res.send(`{'error': '${err}'}`);
   }
 };
+
+// Handle a delete one view with id from query
+exports.election_delete_Page = async function(req, res) {
+  console.log("Delete view for id " + req.query.id)
+  try{
+  result = await Election.findById(req.query.id)
+  res.render('electiondelete', { title: 'Election Delete', toShow:
+  result });
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+  };
