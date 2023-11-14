@@ -1,3 +1,4 @@
+const election = require('../models/election');
 var Election = require('../models/election');
 // List of all Elections
 exports.election_list = function(req, res) {
@@ -19,6 +20,10 @@ res.send('NOT IMPLEMENTED: Election delete DELETE ' + req.params.id);
 exports.election_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: Election update PUT' + req.params.id);
 };
+// Add
+exports.election_view_one_Page = function(req, res) {
+  res.send('NOT IMPLEMENTED: Election view one page' + req.params.id);
+  };
 
 // List of all Elections
 exports.election_list = async function(req, res) {
@@ -48,7 +53,7 @@ exports.election_view_all_Page = async function(req, res) {
 // Handle Election create on POST.
 exports.election_create_post = async function(req, res) {
     console.log(req.body)
-    let document = new Election();
+    let document = new election();
     document.year = req.body.year;
     document.location = req.body.location;
     document.candidate = req.body.candidate;
@@ -105,3 +110,17 @@ ${JSON.stringify(req.body)}`);
     res.send(`{"error": ${err}: Update for id ${req.params.id} failed`);
   }
 };
+
+// Handle a show one view with id specified by query
+exports.election_view_one_Page = async function(req, res) {
+  console.log("single view for id " + req.query.id)
+  try{
+  result = await Election.findById( req.query.id)
+  res.render('electiondetail',
+  { title: 'Election Detail', toShow: result });
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+  };

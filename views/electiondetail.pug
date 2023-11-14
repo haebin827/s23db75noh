@@ -1,0 +1,21 @@
+extends layout
+block content
+h1= title
+
+- let election_id = toShow._id
+- let election_year = toShow.year
+- let election_location = toShow.location
+- let election_candidate = toShow.candidate
+div
+div.row
+div(class='electionAttr mr-3') Election ID is:
+div #{election_id}
+div.row
+div(class='electionAttr mr-3') Election Year is:
+div #{election_year}
+div.row
+div(class='electionAttr mr-3') Election Location is:
+div #{election_location}
+div.row
+div(class='electionAttr mr-3') Election Candidate is:
+div #{election_candidate}
