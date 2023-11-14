@@ -12,4 +12,5 @@ router.get("/", election_controllers.election_list);
 router.get('/:id', election_controllers.election_detail);
 router.get('/detail', election_controllers.election_view_one_Page);
 router.get('/create', election_controllers.election_create_Page);
+router.get('/update', election_controllers.election_update_Page);
 module.exports = router;
