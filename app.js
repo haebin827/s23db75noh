@@ -6,10 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var electionsRouter = require('./routes/elections');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
 var resourceRouter = require('./routes/resource');
+var electionRouter=require('./routes/elections');
 var Election = require("./models/election");
 
 require('dotenv').config();
@@ -49,7 +49,7 @@ console.error(err)
 });
 }
 
-let reseed = true;
+let reseed = false;
 if (reseed) {recreateDB();}
 var app = express();
 
@@ -72,10 +72,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/elections', electionsRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
-app.use('/election', Election);
+app.use('/election', electionRouter);
 app.use('/resource', resourceRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
