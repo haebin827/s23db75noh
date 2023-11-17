@@ -7,5 +7,12 @@ block content
   div(class="container-fluid")
   div(class="row m-1")
     each election in Elections
+      - let destination = `dispatch(\"/election/update?id=${election._id}\")`
       div(class="col-ml-1 btn btn-light") #{election._id} - #{election.year} - #{election.location} - #{election.candidate}
+      button.btn( class="btn-primary ml-1", onclick= destination) Update
+
+  script.
+      function dispatch(path){
+        window.location.href=path
+      }
     
