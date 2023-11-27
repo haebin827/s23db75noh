@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,7 +19,7 @@ const connectionString =
 process.env.MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString);
-
+var LocalStrategy = require('passport-local').Strategy;
 // We can seed the collection if needed on server start
 async function recreateDB(){
 // Delete everything

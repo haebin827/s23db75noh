@@ -2,13 +2,14 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 var Account = require('../models/account');
+var http = require("http-errors");
 
 router.get('/', function (req, res) {
-  res.render('index', { title: 'Costume App', user : req.user });
+  res.render('index', { title: 'Election App', user : req.user });
 });
 
 router.get('/register', function(req, res) {
-  res.render('register', { title: 'Costume App Registration'});
+  res.render('register', { title: 'Election App Registration'});
 });
 
 router.post('/register', function(req, res) {
@@ -42,7 +43,7 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-  res.render('login', { title: 'Costume App Login', user : req.user });
+  res.render('login', { title: 'Election App Login', user : req.user });
 });
 router.post('/login', passport.authenticate('local'), function(req, res) {
   res.redirect('/');
