@@ -7,9 +7,9 @@ block content
     h2 No instance to delete 
   else 
     - let election_id = toShow._id
-    - let election_year = toShow.year
-    - let election_location = toShow.location
-    - let election_candidate = toShow.candidate
+    - let year = toShow.year
+    - let location = toShow.location
+    - let candidate = toShow.candidate
     - let actionid = "/resource/Election/" + election_id 
     script let actionid = "#{actionid}" 
     div 
@@ -18,13 +18,13 @@ block content
         div(class='details mr-3') #{election_id} 
       div.row 
         div(class='electionAttr mr-3') Election Year is: 
-        div(class='details mr-3') #{election_year} 
+        div(class='details mr-3') #{year} 
       div.row 
         div(class='electionAttr mr-3') Election location is: 
-        div(class='details mr-3') #{election_location} 
+        div(class='details mr-3') #{location} 
       div.row 
         div(class='electionAttr mr-3') Election candidate is: 
-        div(class='details mr-3') #{election_candidate} 
+        div(class='details mr-3') #{candidate} 
  
     button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
     button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
