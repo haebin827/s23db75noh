@@ -7,24 +7,24 @@ block content
     h2 No instance to update
   else
   - let election_id = toShow._id
-  - let election_year = toShow.year
-  - let election_location = toShow.location
-  - let election_candidate = toShow.candidate
+  - let year = toShow.year
+  - let location = toShow.location
+  - let candidate = toShow.candidate
   
   div.row(class='mb-2')
     div.mr-1 ID is
     div #{election_id}
-  - let actionid = "/resource/Election/" + election_id
+  - let actionid = "/resource/elections/" + election_id
   form(id='electionForm', action= actionid, method="PUT")
     div.form-group
-        label.electionAttr(for='election_year') Election Year
-        input#election_year(type='text', name='election_year', value= election_year )
+        label.electionAttr(for='year') Election Year
+        input#election_year(type='number', name='year', value= year )
     div.form-group
-        label.electionAttr(for='election_location') Election Location
-        input#City(type='text', name='election_location', value= election_location )
+        label.electionAttr(for='location') Election Location
+        input#City(type='text', name='location', value= location )
     div.form-group
-        label.electionAttr(for='election_candidate') Election Candidate
-        input#Students(type='number', name='election_candidate', value= election_candidate )
+        label.electionAttr(for='candidate') Election Candidate
+        input#Students(type='text', name='candidate', value= candidate )
     input(type="submit")
 
   script.

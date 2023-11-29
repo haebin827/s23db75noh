@@ -2,7 +2,6 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 var Account = require('../models/account');
-var http = require("http-errors");
 
 router.get('/', function (req, res) {
   res.render('index', { title: 'Election App', user : req.user });
@@ -15,6 +14,7 @@ router.get('/register', function(req, res) {
 router.post('/register', function(req, res) {
   Account.findOne({ username : req.body.username })
   .then(function (user){
+    console.log("hi")
     if(user != null ){
       console.log("exists " + req.body.username)
       return res.render('register', { title: 'Registration',

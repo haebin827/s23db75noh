@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 // Require controller modules.
 var api_controller = require('../controllers/api');
 var election_controller = require('../controllers/election');
 /// API ROUTE ///
 // GET resources base.
+
+
 router.get('/', api_controller.api);
 /// COSTUME ROUTES ///
 // POST request for creating a Election.
@@ -17,4 +20,7 @@ router.put('/elections/:id', election_controller.election_update_put);
 router.get('/elections/:id', election_controller.election_detail);
 // GET request for list of all Election items.
 router.get('/elections', election_controller.election_list);
+/* GET update costume page */
+//router.get('/update', secured, election_controller.election_update_Page);
+router.post('/login', passport.authenticate('local'), function(req, res) {res.redirect('/');});
 module.exports = router;
